@@ -1,27 +1,52 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app {
+  display: flex;
+  gap: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.solid:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gutter-xs);
+
+  position: relative;
+  padding-right: var(--gutter-xs);
 }
 
-.card {
-  padding: 2em;
+.nav::after {
+  width: 1px;
+  height: 100%;
+  content: '';
+  background-color: gray;
+  position: absolute;
+  top: 0;
+  left: 100%;
 }
 
-.read-the-docs {
-  color: #888;
+.nav > * {
+  display: flex;
+  align-items: center;
+}
+
+.nav > *::after {
+  content: '👈';
+  visibility: hidden;
+}
+
+[aria-current='page'] {
+  color: coral;
+  text-decoration: none;
+}
+
+[aria-current='page']::after {
+  visibility: visible !important;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter,
+.fade-exit-to {
+  opacity: 0;
 }

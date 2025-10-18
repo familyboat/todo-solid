@@ -2,7 +2,9 @@
 import { render } from 'solid-js/web'
 import './index.css'
 import App from './App.tsx'
+import { HashRouter } from '@solidjs/router'
+import { routes } from './router/index.ts'
 
 const root = document.getElementById('root')
 
-render(() => <App />, root!)
+render(() => <HashRouter root={App}>{routes}</HashRouter>, root!)

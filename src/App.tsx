@@ -1,29 +1,28 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
+import { A, useIsRouting, type RouteSectionProps } from '@solidjs/router'
 import './App.css'
+import { routerConfig } from './configs'
+import { Show, type Component } from 'solid-js'
+import { Transition } from 'solid-transition-group'
 
-function App() {
-  const [count, setCount] = createSignal(0)
+const App: Component<RouteSectionProps> = (props) => {
+  const isRouting = useIsRouting()
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://solidjs.com" target="_blank">
-          <img src={solidLogo} class="logo solid" alt="Solid logo" />
-        </a>
-      </div>
-      <h1>Vite + Solid</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count()}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">Click on the Vite and Solid logos to learn more</p>
+      <main class="app">
+        <nav class="nav">
+          <A href={routerConfig.HomePath}> home </A>
+          <A href={routerConfig.ToDoPath}> to-do </A>
+        </nav>
+
+        <article class="article">
+          <Transition name="fade" mode="outin">
+            <Show when={isRouting() ? null : true}>
+              <div>{props.children}</div>
+            </Show>
+          </Transition>
+        </article>
+      </main>
     </>
   )
 }
