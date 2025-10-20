@@ -6,7 +6,8 @@ import { createAutoAnimate } from '@formkit/auto-animate/solid'
 
 export default function TodoList() {
   onMount(() => {
-    loadFromDb()
+    // 0.3 秒的转场动画会影响这里的列表动画，因此延迟加载数据
+    setTimeout(loadFromDb, 350)
   })
 
   const createdTodos = () => {
@@ -26,7 +27,7 @@ export default function TodoList() {
   return (
     <>
       <ul class={styles.list} ref={parent}>
-        <Show when={todosStore.todos.length}>
+        <Show when={todosStore.todos.length > 0}>
           <header>已创建：</header>
           <For each={createdTodos()}>
             {(todo, index) => <TodoItem index={index()} todo={todo} />}
