@@ -25,8 +25,8 @@ export default function TodoList() {
 
   return (
     <>
-      <Show when={todosStore.todos.length}>
-        <ul class={styles.list} ref={parent}>
+      <ul class={styles.list} ref={parent}>
+        <Show when={todosStore.todos.length}>
           <header>已创建：</header>
           <For each={createdTodos()}>
             {(todo, index) => <TodoItem index={index()} todo={todo} />}
@@ -42,8 +42,8 @@ export default function TodoList() {
             {(todo, index) => <TodoItem index={index()} todo={todo} />}
           </For>
           <hr />
-        </ul>
-      </Show>
+        </Show>
+      </ul>
     </>
   )
 }
