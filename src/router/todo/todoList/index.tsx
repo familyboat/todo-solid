@@ -1,5 +1,5 @@
 import styles from './index.module.css'
-import { For, onMount } from 'solid-js'
+import { For, onMount, Show } from 'solid-js'
 import { isCreated, isDeleted, isDone, loadFromDb, todosStore } from '@/stores/todo'
 import TodoItem from '../todoItem'
 import { createAutoAnimate } from '@formkit/auto-animate/solid'
@@ -25,19 +25,25 @@ export default function TodoList() {
 
   return (
     <>
-      <ul class={styles.list} ref={parent}>
-        <header>已创建：</header>
-        <For each={createdTodos()}>{(todo, index) => <TodoItem index={index()} todo={todo} />}</For>
-        <hr />
+      <Show when={todosStore.todos.length}>
+        <ul class={styles.list} ref={parent}>
+          <header>已创建：</header>
+          <For each={createdTodos()}>
+            {(todo, index) => <TodoItem index={index()} todo={todo} />}
+          </For>
+          <hr />
 
-        <header>已完成：</header>
-        <For each={doneTodos()}>{(todo, index) => <TodoItem index={index()} todo={todo} />}</For>
-        <hr />
+          <header>已完成：</header>
+          <For each={doneTodos()}>{(todo, index) => <TodoItem index={index()} todo={todo} />}</For>
+          <hr />
 
-        <header>已删除：</header>
-        <For each={deletedTodos()}>{(todo, index) => <TodoItem index={index()} todo={todo} />}</For>
-        <hr />
-      </ul>
+          <header>已删除：</header>
+          <For each={deletedTodos()}>
+            {(todo, index) => <TodoItem index={index()} todo={todo} />}
+          </For>
+          <hr />
+        </ul>
+      </Show>
     </>
   )
 }
