@@ -13,20 +13,22 @@ import { createStore, produce } from 'solid-js/store'
  */
 type DateString = string
 
-export enum TodoStatus {
+export const TodoStatus = {
   /**
    * 已创建
    */
-  'created',
+  created: 0,
   /**
    * 已完成
    */
-  'done',
+  done: 1,
   /**
    * 已删除
    */
-  'deleted',
-}
+  deleted: 2,
+} as const
+
+export type TodoStatus = (typeof TodoStatus)[keyof typeof TodoStatus]
 
 /**
  * 对 UTC 值序列化
